@@ -45,7 +45,9 @@ start_time = time()
 
 #Go to Manga root page
 URL = "http://bato.to/reader#{0}".format(argv[1])
-adb = argv[2]
+adb = None
+if len(argv) == 3:
+    adb = argv[2]
 driver = brInit(adb_crx = adb)
 urlLoad(driver, URL)
 
