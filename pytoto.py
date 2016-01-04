@@ -57,7 +57,7 @@ mgCrtFldr(title)
 chapter_dict = chGetInfo(driver)
 chapter_total = len(list(chapter_dict))
 chapter_len = chapter_total
-print "Found", chapter_len, "chapters."
+print "Found", chapter_total, "chapters."
 
 #iterates through the chapters
 for key in chapter_dict:
@@ -104,7 +104,7 @@ for key in chapter_dict:
         page_info = pgInfo(page_select)
         pgSave(img_url, title, volume, chapter, page_info)
         percent = 100-(chapter_len/chapter_total)
-    print ">>> {0} completed".format(percent)
+    print ">>> {0:%} completed".format(percent)
 
 time_minutes = (time()-start_time)/60
 
