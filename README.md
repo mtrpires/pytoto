@@ -9,7 +9,7 @@ Download script files to any folder and run from command line:
 
 >> python pytoto.py HASH ADBLOCK_FILE
 
-The hash of wanted manga is found when you’re browsing at Bato.to. You should use characters after the #. You can also provide a Chrome Extension file (CRX) of your favorite adblock extension. This is optional, but will considerably improv page load speed, e.g.:
+The hash of the manga is found when you’re browsing at Bato.to. You should use characters after the #. You can also provide a Chrome Extension file (CRX) of your favourite adblock extension. This is optional, but will considerably improve page load speeds, e.g.:
 
 >> python pytoto.py 13e499ca7e9c2c4a "AdBlock_v2.45.crx"
 
