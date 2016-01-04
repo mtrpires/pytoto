@@ -16,8 +16,8 @@
 # from http://bato.to/reader#13e499ca7e9c2c4a
 #
 # e.g. python pytoto.py 13e499ca7e9c2c4a "AdBlock_v2.45.crx"
-# 
-# Optional: Pytoto also allows you to use an adblock extension. Use the 
+#
+# Optional: Pytoto also allows you to use an adblock extension. Use the
 # filepath to the crx file as a second parameter.
 #
 # @mtrpires
@@ -26,19 +26,19 @@ from sys import argv
 from time import sleep
 from time import time
 from random import uniform
-from _functions import brInit
-from _functions import urlLoad
-from _functions import imgGetURL
-from _functions import mgCrtFldr
-from _functions import mgGetTtl
-from _functions import chChg
-from _functions import chGetInfo
-from _functions import chGetLen
-from _functions import pgChg
-from _functions import pgGetList
-from _functions import pgGetLen
-from _functions import pgInfo
-from _functions import pgSave
+from pytoto_functions import brInit
+from pytoto_functions import urlLoad
+from pytoto_functions import imgGetURL
+from pytoto_functions import mgCrtFldr
+from pytoto_functions import mgGetTtl
+from pytoto_functions import chChg
+from pytoto_functions import chGetInfo
+from pytoto_functions import chGetLen
+from pytoto_functions import pgChg
+from pytoto_functions import pgGetList
+from pytoto_functions import pgGetLen
+from pytoto_functions import pgInfo
+from pytoto_functions import pgSave
 
 #start counter
 start_time = time()
@@ -88,18 +88,23 @@ for key in chapter_dict:
                 pgChg(page_select, page)
                 flag = False
             except:
-                print "Error downloading page. Trying again."
-                flag = True
+                print "Error retrieving chapter information. Trying again."
         rd_sleep = uniform(3, 5)
         sleep(rd_sleep)
-        img_url = imgGetURL(driver)
-        print "URL:", img_url
+        flag = True
+        while flag:
+            try:
+                img_url = imgGetURL(driver)
+                print "URL:", img_url
+                flag = False
+            except:
+                print "Error retrieving img URL. Trying again."
         #updates driver object with current HTML
         page_select = pgGetList(driver)
         page_info = pgInfo(page_select)
         pgSave(img_url, title, volume, chapter, page_info)
         percent = 100-(chapter_len/chapter_total)
-    print ">>> {0:%} completed".format(percent)
+    print ">>> {0} completed".format(percent)
 
 time_minutes = (time()-start_time)/60
 
