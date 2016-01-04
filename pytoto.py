@@ -103,7 +103,7 @@ for key in chapter_dict:
         page_select = pgGetList(driver)
         page_info = pgInfo(page_select)
         pgSave(img_url, title, volume, chapter, page_info)
-        percent = 100-(chapter_len/chapter_total)
+        percent = 1-(chapter_len/chapter_total)
     print ">>> {0:%} completed".format(percent)
 
 time_minutes = (time()-start_time)/60
