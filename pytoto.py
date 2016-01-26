@@ -26,19 +26,19 @@ from sys import argv
 from time import sleep
 from time import time
 from random import uniform
-from pytoto_functions import brInit
-from pytoto_functions import urlLoad
-from pytoto_functions import imgGetURL
-from pytoto_functions import mgCrtFldr
-from pytoto_functions import mgGetTtl
-from pytoto_functions import chChg
-from pytoto_functions import chGetInfo
-from pytoto_functions import chGetLen
-from pytoto_functions import pgChg
-from pytoto_functions import pgGetList
-from pytoto_functions import pgGetLen
-from pytoto_functions import pgInfo
-from pytoto_functions import pgSave
+from _functions import brInit
+from _functions import urlLoad
+from _functions import imgGetURL
+from _functions import mgCrtFldr
+from _functions import mgGetTtl
+from _functions import chChg
+from _functions import chGetInfo
+from _functions import chGetLen
+from _functions import pgChg
+from _functions import pgGetList
+from _functions import pgGetLen
+from _functions import pgInfo
+from _functions import pgSave
 
 #start counter
 start_time = time()
