@@ -16,8 +16,8 @@
 # from http://bato.to/reader#13e499ca7e9c2c4a
 #
 # e.g. python pytoto.py 13e499ca7e9c2c4a "AdBlock_v2.45.crx"
-# 
-# Optional: Pytoto also allows you to use an adblock extension. Use the 
+#
+# Optional: Pytoto also allows you to use an adblock extension. Use the
 # filepath to the crx file as a second parameter.
 #
 # @mtrpires
@@ -59,7 +59,7 @@ mgCrtFldr(title)
 chapter_dict = chGetInfo(driver)
 chapter_total = len(list(chapter_dict))
 chapter_len = chapter_total
-print "Found", chapter_len, "chapters."
+print "Found", chapter_total, "chapters."
 
 #iterates through the chapters
 for key in chapter_dict:
@@ -90,17 +90,22 @@ for key in chapter_dict:
                 pgChg(page_select, page)
                 flag = False
             except:
-                print "Error downloading page. Trying again."
-                flag = True
+                print "Error retrieving chapter information. Trying again."
         rd_sleep = uniform(3, 5)
         sleep(rd_sleep)
-        img_url = imgGetURL(driver)
-        print "URL:", img_url
+        flag = True
+        while flag:
+            try:
+                img_url = imgGetURL(driver)
+                print "URL:", img_url
+                flag = False
+            except:
+                print "Error retrieving img URL. Trying again."
         #updates driver object with current HTML
         page_select = pgGetList(driver)
         page_info = pgInfo(page_select)
         pgSave(img_url, title, volume, chapter, page_info)
-        percent = 100-(chapter_len/chapter_total)
+        percent = 1-(chapter_len/chapter_total)
     print ">>> {0:%} completed".format(percent)
 
 time_minutes = (time()-start_time)/60

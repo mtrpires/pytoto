@@ -219,7 +219,13 @@ def pgSave(img_url, title, volume, chapter, page):
 
     return: prints confirmation page was saved.
     """
-    img = urllib2.urlopen(img_url).read()
+    flag = True
+    while flag:
+        try:
+           img = urllib2.urlopen(img_url).read()
+           flag = False
+        except:
+            print "Internect connection seems to be off. I'll keep trying."
     filename = os.path.abspath('{0}/{1} - {2}/{3} - {4} {5} - {6}.jpg'\
         .format(title, title, volume, title, volume, chapter, page))
     volume_folder = os.path.abspath('{0}/{1} - {2}'\
