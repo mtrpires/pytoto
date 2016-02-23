@@ -81,7 +81,7 @@ for key in chapter_dict:
     for page in range(page_len):
         # A naughty workaround for webpages that load faster than
         # Selenium is able to update and get the pages list.
-        # Usually pages load just fine, but sometimes Selenium needs a 
+        # Usually pages load just fine, but sometimes Selenium needs a
         # second try to get it right.
         flag = True
         while flag:
