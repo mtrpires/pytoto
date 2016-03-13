@@ -40,44 +40,44 @@ from _functions import pgGetLen
 from _functions import pgInfo
 from _functions import pgSave
 
-#start counter
+# start counter
 start_time = time()
 
-#Go to Manga root page
+# Go to Manga root page
 URL = "http://bato.to/reader#{0}".format(argv[1])
 adb = None
 if len(argv) == 3:
     adb = argv[2]
-driver = brInit(adb_crx = adb)
+driver = brInit(adb_crx=adb)
 urlLoad(driver, URL)
 
-#Get Manga information & create folder
+# Get Manga information & create folder
 title = mgGetTtl(driver)
 mgCrtFldr(title)
 
-#Find chapters, create a dict and store its length
+# Find chapters, create a dict and store its length
 chapter_dict = chGetInfo(driver)
 chapter_total = len(list(chapter_dict))
 chapter_len = chapter_total
 print "Found", chapter_total, "chapters."
 
-#iterates through the chapters
+# iterates through the chapters
 for key in chapter_dict:
     volume_and_chapter = chChg(driver, key)
-    #Waits between 3-5 seconds for page to load
-    #Some JS may take longer to show up.
-    #Also, I don't want to flood the server with requests.
+    # Waits between 3-5 seconds for page to load
+    # Some JS may take longer to show up.
+    # Also, I don't want to flood the server with requests.
     rd_sleep = uniform(3, 5)
     sleep(rd_sleep)
     volume = volume_and_chapter[0]
     chapter = volume_and_chapter[1]
-    #this is to calculate progress...
+    # this is to calculate progress...
     chapter_len -= 1
-    #gets the number of pages.
+    # gets the number of pages.
     page_select = pgGetList(driver)
     page_len = pgGetLen(page_select)
     print "Found", page_len, "pages in", volume, chapter
-    #iterates through the pages
+    # iterates through the pages
     for page in range(page_len):
         # A naughty workaround for webpages that load faster than
         # Selenium is able to update and get the pages list.
@@ -101,7 +101,7 @@ for key in chapter_dict:
                 flag = False
             except:
                 print "Error retrieving img URL. Trying again."
-        #updates driver object with current HTML
+        # updates driver object with current HTML
         page_select = pgGetList(driver)
         page_info = pgInfo(page_select)
         pgSave(img_url, title, volume, chapter, page_info)
